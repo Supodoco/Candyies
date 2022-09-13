@@ -281,7 +281,7 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
             let sec = indexPath.section == 0 ? Singleton.shared.sectionOne : Singleton.shared.sectionTwo
             let counter = returnCounter(indexPath)
             
-            cell.configure(image: sec[indexPath.row + counter]?.image ?? UIImage(),
+            cell.configure(image: sec[indexPath.row + counter]?.image ?? UIImage(named: "imgDefault") ?? UIImage(),
                            name: sec[indexPath.row + counter]?.name ?? "Тортик",
                            weight: sec[indexPath.row + counter]?.weight ?? 0,
                            amount: sec[indexPath.row + counter]?.amount ?? 0)
