@@ -59,11 +59,6 @@ class CatalogCustomCell: UICollectionViewCell {
     
     let labelCounter = UILabel()
     
-    var heartView: UIButton = {
-        let view = UIButton()
-        return view
-    }()
-    
     let loadingView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray
@@ -77,11 +72,7 @@ class CatalogCustomCell: UICollectionViewCell {
         return view
     }()
     
-    
-    func heartConfigure(_ color: UIColor) {
-        let img = UIImage(systemName: "heart.fill")?.withTintColor(color, renderingMode: .alwaysOriginal)
-        heartView.setImage(img, for: .normal)
-    }
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -89,8 +80,6 @@ class CatalogCustomCell: UICollectionViewCell {
         
         
         contentView.addSubview(imageView)
-        contentView.addSubview(heartView)
-        
         contentView.addSubview(nameOfItem)
         
         contentView.addSubview(weightOfItem)
@@ -129,10 +118,6 @@ class CatalogCustomCell: UICollectionViewCell {
                                       y: 20,
                                       width: contentView.frame.width - 40,
                                       height: contentView.frame.width - 40)
-        heartView.frame      = CGRect(x: contentView.frame.width - 50,
-                                      y: contentView.frame.width,
-                                      width: 25,
-                                      height: 20)
         nameOfItem.frame     = CGRect(x: 20,
                                       y: contentView.frame.width,
                                       width: contentView.frame.width - 40,

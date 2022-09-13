@@ -247,17 +247,6 @@ class Catalog: UIViewController {
         }
     }
     
-    @objc private func gestureFavorite(sender: UITapGestureRecognizer) {
-        //        guard let indexPath = returnIndexPath(sender) else { return }
-        //        if favorites[indexPath.row] == 1 {
-        //            favorites[indexPath.row] = 0
-        //        } else {
-        //            favorites[indexPath.row] = 1
-        //        }
-        //        print(favorites)
-        collectionCatalog?.reloadData()
-    }
-    
     func returnCounter(_ indexPath: IndexPath) -> Int {
         indexPath.section == 0 ? 0 : Singleton.shared.counter
     }
@@ -301,12 +290,6 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.loadingViewSecond.isHidden = true
             cell.imageView.alpha = 1
             
-            if favorites[indexPath.row] == 0 {
-                cell.heartConfigure(.black)
-            } else {
-                cell.heartConfigure(.red)
-            }
-            
             cell.buttonMinus = cell.buttonConfigure(cell.buttonMinus, setTitle: "-")
             cell.buttonPlus  = cell.buttonConfigure(cell.buttonPlus, setTitle: "+")
             cell.buttonPrice = cell.buttonConfigure(
@@ -344,11 +327,6 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
             )
             cell.buttonMinus.addGestureRecognizer(gestureMinusCount)
             
-            let gestureFavorite = UITapGestureRecognizer(
-                target: self,
-                action: #selector(gestureFavorite(sender:))
-            )
-            cell.heartView.addGestureRecognizer(gestureFavorite)
             
         } else if !Singleton.shared.loaded.0 && !Singleton.shared.loaded.1 {
             Timer.scheduledTimer(withTimeInterval: 1.4, repeats: true) { timer in
