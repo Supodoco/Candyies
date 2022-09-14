@@ -13,6 +13,7 @@ struct LoadingModel: Codable {
     let name: String
     let weight: Int
     let price: Int
+    let description: String
 }
 
 struct CatalogModel: Equatable {
@@ -21,6 +22,7 @@ struct CatalogModel: Equatable {
     let weight: Int
     let price: Int
     var amount: Int
+    let description: String
 }
 
 

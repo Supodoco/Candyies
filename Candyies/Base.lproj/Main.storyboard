@@ -26,6 +26,21 @@
             </objects>
             <point key="canvasLocation" x="1" y="548"/>
         </scene>
+        <!--Detail Item Controller-->
+        <scene sceneID="Ufd-Mf-R0k">
+            <objects>
+                <viewController storyboardIdentifier="DetailItem" id="HVw-SW-WdJ" customClass="DetailItemController" customModule="Candyies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eF1-aN-9Ko">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="BO6-zc-ZrI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QiH-et-7wU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-649" y="1229"/>
+        </scene>
         <!--Buy Page-->
         <scene sceneID="wl1-GQ-cjJ">
             <objects>

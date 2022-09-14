@@ -54,7 +54,8 @@ class Catalog: UIViewController {
         collectionCatalog.showsVerticalScrollIndicator = false
         view.addSubview(collectionCatalog)
         collectionCatalog.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-        
+        collectionCatalog.backgroundColor = .white
+
         collectionCatalog.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionCatalog.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -284,7 +285,9 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.configure(image: sec[indexPath.row + counter]?.image ?? UIImage(named: "imgDefault") ?? UIImage(),
                            name: sec[indexPath.row + counter]?.name ?? "Тортик",
                            weight: sec[indexPath.row + counter]?.weight ?? 0,
-                           amount: sec[indexPath.row + counter]?.amount ?? 0)
+                           amount: sec[indexPath.row + counter]?.amount ?? 0,
+                           description: sec[indexPath.row + counter]?.description ?? ""
+            )
             
             cell.loadingView.isHidden = true
             cell.loadingViewSecond.isHidden = true
@@ -360,10 +363,18 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
         UIView.animate(withDuration: 0.2, animations: {
             cell.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
         }, completion: { finished in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let detailItem = storyboard.instantiateViewController(identifier: "DetailItem") as? DetailItemController else { return }
+            
+            detailItem.image.image = cell.imageView.image
+            detailItem.label.text = "\(cell.nameOfItem.text ?? "") · \(cell.weightOfItem.text ?? "")" + "\(cell.desriptionData.text!.count > 0 ? " · \(cell.desriptionData.text ?? "")" : "")"
+//            + cell.desriptionData.text?.count > 0 ? " * \(cell.desriptionData.text)" : ""
+            self.present(detailItem, animated: true)
             UIView.animate(withDuration: 0.2) {
                 cell.transform = .identity
             }
         })
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

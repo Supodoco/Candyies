@@ -45,6 +45,7 @@ class Gallery: UIViewController {
         collectionImages.dataSource = self
         collectionImages.delegate = self
         collectionImages.showsVerticalScrollIndicator = false
+        collectionImages.backgroundColor = .white
         view.addSubview(collectionImages)
         collectionImages.frame = view.bounds
     }

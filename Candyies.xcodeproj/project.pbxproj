@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C418BFC828CFE83F00ADA32C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418BFC728CFE83F00ADA32C /* Enums.swift */; };
+		C420003328D1EE78005EBBE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420003228D1EE78005EBBE0 /* User.swift */; };
+		C420003528D23D4D005EBBE0 /* DetailItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420003428D23D4D005EBBE0 /* DetailItemController.swift */; };
 		C4628FCA28CE423800B15FDB /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4628FC928CE423800B15FDB /* Singleton.swift */; };
 		C465AFE628C4F01300D11811 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C465AFE528C4F01300D11811 /* AppDelegate.swift */; };
 		C465AFE828C4F01300D11811 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C465AFE728C4F01300D11811 /* SceneDelegate.swift */; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		C418BFC728CFE83F00ADA32C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		C420003228D1EE78005EBBE0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C420003428D23D4D005EBBE0 /* DetailItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemController.swift; sourceTree = "<group>"; };
 		C4628FC928CE423800B15FDB /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		C465AFE228C4F01300D11811 /* Candyies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Candyies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C465AFE528C4F01300D11811 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 				C465AFFC28C4F63000D11811 /* Catalog.swift */,
 				C48484A928C61B0700C868B7 /* CatalogCustomCell.swift */,
 				C48484B728CBA0B300C868B7 /* CatalogSectionHeader.swift */,
+				C420003428D23D4D005EBBE0 /* DetailItemController.swift */,
 				C48484B328C8F5D500C868B7 /* Networking.swift */,
 				C48484B928CBA0BE00C868B7 /* Model */,
 			);
@@ -154,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				C4628FC928CE423800B15FDB /* Singleton.swift */,
+				C420003228D1EE78005EBBE0 /* User.swift */,
 				C48484AB28C667CD00C868B7 /* CatalogModel.swift */,
 				C418BFC728CFE83F00ADA32C /* Enums.swift */,
 			);
@@ -246,9 +252,11 @@
 				C4628FCA28CE423800B15FDB /* Singleton.swift in Sources */,
 				C48484B028C7AB8400C868B7 /* BuyCell.swift in Sources */,
 				C465AFE628C4F01300D11811 /* AppDelegate.swift in Sources */,
+				C420003528D23D4D005EBBE0 /* DetailItemController.swift in Sources */,
 				C465AFE828C4F01300D11811 /* SceneDelegate.swift in Sources */,
 				C418BFC828CFE83F00ADA32C /* Enums.swift in Sources */,
 				C48484AA28C61B0700C868B7 /* CatalogCustomCell.swift in Sources */,
+				C420003328D1EE78005EBBE0 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +409,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -429,6 +439,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

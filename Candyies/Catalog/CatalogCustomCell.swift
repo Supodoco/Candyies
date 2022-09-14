@@ -40,6 +40,7 @@ class CatalogCustomCell: UICollectionViewCell {
         label.textColor = .lightGray
         return label
     }()
+    
     var buttonPrice = UIButton()
     var buttonMinus = UIButton()
     var buttonPlus = UIButton()
@@ -72,7 +73,10 @@ class CatalogCustomCell: UICollectionViewCell {
         return view
     }()
     
-
+    let desriptionData: UILabel = {
+        let label = UILabel()
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -93,11 +97,12 @@ class CatalogCustomCell: UICollectionViewCell {
         contentView.addSubview(loadingViewSecond)
         
     }
-    func configure(image: UIImage, name: String, weight: Int, amount: Int) {
-        imageView.image   = image
-        nameOfItem.text   = name
-        weightOfItem.text = "\(weight) г"
-        labelCounter.text = String(amount)
+    func configure(image: UIImage, name: String, weight: Int, amount: Int, description: String) {
+        imageView.image     = image
+        nameOfItem.text     = name
+        weightOfItem.text   = "\(weight) г"
+        labelCounter.text   = String(amount)
+        desriptionData.text = description
     }
 
     required init?(coder: NSCoder) {

@@ -47,7 +47,8 @@ extension Catalog {
                                     name: candy.name,
                                     weight: candy.weight,
                                     price: candy.price,
-                                    amount: 0
+                                    amount: 0,
+                                    description: candy.description
                                 )
                             }
                         } else {
@@ -58,7 +59,8 @@ extension Catalog {
                                     name: candy.name,
                                     weight: candy.weight,
                                     price: candy.price,
-                                    amount: 0
+                                    amount: 0,
+                                    description: candy.description
                                 )
                             }
                         }
