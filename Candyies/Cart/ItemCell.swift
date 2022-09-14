@@ -13,6 +13,8 @@ class ItemCell: UITableViewCell {
         let img = UIImageView()
         img.layer.cornerRadius = 8
         img.layer.masksToBounds = true
+        img.contentMode = .scaleAspectFill
+        img.clipsToBounds = true
         return img
     }()
     var labelName: UILabel = {
