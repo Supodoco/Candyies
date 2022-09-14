@@ -139,21 +139,35 @@ extension Cart: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         if Singleton.shared.cart.isEmpty {
             let cell = UITableViewCell()
             let label: UILabel = {
                 let label = UILabel()
                 label.text = "Ваша корзина пуста"
+                label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
                 return label
             }()
-            label.translatesAutoresizingMaskIntoConstraints = false
+            
             cell.addSubview(label)
-            label.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
-            label.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+            label.frame = CGRect(x: view.frame.width / 2 - 100, y: view.frame.height / 2 + 30, width: 200, height: 50)
+            if let confettiImageView = UIImageView.fromGif(
+                    frame: CGRect(
+                        x: view.frame.width / 2 - 100,
+                        y: view.frame.height / 2 - 200,
+                        width: 200, height: 200),
+                    resourceName: "hungry"
+            ) {
+                cell.addSubview(confettiImageView)
+                confettiImageView.animationDuration = 1.3
+                confettiImageView.startAnimating()
+            }
+            tableView.isScrollEnabled = false
             return cell
         }
         
         if indexPath.row < Singleton.shared.cart.count {
+            tableView.isScrollEnabled = true
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: ItemCell.identifier,
                 for: indexPath) as? ItemCell else { return UITableViewCell() }
@@ -224,9 +238,5 @@ extension Cart: UITableViewDelegate, UITableViewDataSource {
             return 60
         }
     }
-    
-    
-    
-    
 }
 
