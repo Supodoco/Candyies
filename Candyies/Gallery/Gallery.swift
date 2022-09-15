@@ -33,7 +33,7 @@ class Gallery: UIViewController {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 1
-        if view.frame.width > 800 {
+        if view.frame.width > 750 {
             layout.itemSize = CGSize(width: (view.frame.width / 4) - 6, height: (view.frame.width / 4) - 6)
         } else {
             layout.itemSize = CGSize(width: (view.frame.width / 3) - 4, height: (view.frame.width / 3) - 4)

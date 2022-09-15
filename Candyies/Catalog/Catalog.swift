@@ -71,14 +71,50 @@ class Catalog: UIViewController {
     func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionIndex, env) -> NSCollectionLayoutSection? in
             switch sectionIndex {
-            case 0: return self.secondLayoutSection()
-            default: return self.firstLayoutSection()
+            case 0: return self.firstLayoutSection()
+            default: return self.secondLayoutSection()
             }
         }
     }
+    
     private func firstLayoutSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+        
+        var itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+                                              heightDimension: .absolute(view.frame.width / 2 + 90))
+        if view.frame.width > 750 {
+            itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33),
+                                              heightDimension: .absolute(view.frame.width / 3 + 80))
+        }
+        print(view.frame.width / 10)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        //        item.contentInsets.bottom = 15
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
+                                               heightDimension: .estimated(500))
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 2)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.boundarySupplementaryItems = [
+            NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                  heightDimension: .estimated(44)),
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .topLeading)
+        ]
+        section.orthogonalScrollingBehavior = .groupPaging
+        
+        return section
+    }
+    private func secondLayoutSection() -> NSCollectionLayoutSection {
+        var itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .absolute(view.frame.width / 2 + 110))
+        if view.frame.width > 750 {
+            itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33),
+                                              heightDimension: .absolute(view.frame.width / 3 + 110))
+        }
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
@@ -104,33 +140,6 @@ class Catalog: UIViewController {
         return section
         
         
-    }
-    private func secondLayoutSection() -> NSCollectionLayoutSection {
-        
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                              heightDimension: .absolute(view.frame.width / 2 + 90))
-        
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        //        item.contentInsets.bottom = 15
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension:
-                .absolute(view.frame.width / 2 + 90))
-        
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 2)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        
-        section.boundarySupplementaryItems = [
-            NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                  heightDimension: .estimated(44)),
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .topLeading)
-        ]
-        section.orthogonalScrollingBehavior = .groupPaging
-        
-        return section
     }
     
     private func labelsConfigure() {
@@ -175,7 +184,7 @@ class Catalog: UIViewController {
         "Бесплатная доставка" : "\(Singleton.shared.freeDeliveryMinSum - Singleton.shared.cartTotalPrice) ₽ до бесплатной доставки"
     }
     private func modelConfigure() {
-        loadData(0, url: salesDataUrl) {
+        Networking.shared.loadData(0, url: salesDataUrl) {
             DispatchQueue.main.async {
                 self.collectionCatalog?.reloadData()
                 print("Reload Interface - Sales")
@@ -184,7 +193,7 @@ class Catalog: UIViewController {
                 print(Singleton.shared.sectionOne)
             }
         }
-        loadData(1, url: catalogDataUrl) {
+        Networking.shared.loadData(1, url: catalogDataUrl) {
             DispatchQueue.main.async {
                 self.collectionCatalog?.reloadData()
                 print("Reload Interface - Catalog")
@@ -354,7 +363,7 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
                 }
             }
             print("Timer fire")
-        }
+        } 
         return cell
     }
     
@@ -368,7 +377,6 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
             
             detailItem.image.image = cell.imageView.image
             detailItem.label.text = "\(cell.nameOfItem.text ?? "") · \(cell.weightOfItem.text ?? "")" + "\(cell.desriptionData.text!.count > 0 ? " · \(cell.desriptionData.text ?? "")" : "")"
-//            + cell.desriptionData.text?.count > 0 ? " * \(cell.desriptionData.text)" : ""
             self.present(detailItem, animated: true)
             UIView.animate(withDuration: 0.2) {
                 cell.transform = .identity

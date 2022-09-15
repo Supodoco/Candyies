@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
-extension Catalog {
+class Networking {
+    static let shared = Networking()
+    private init() {}
     
     func loadImage(_ url: String, _ closure: @escaping (UIImage) -> ())  {
         guard let url = URL(string: url) else { return }
@@ -33,7 +35,7 @@ extension Catalog {
             print(data)
             do {
                 let catalog = try JSONDecoder().decode([LoadingModel].self, from: data)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     let id: Int = section == 0 ? 0 : 50
                     for (index, candy) in catalog.enumerated() {
                         if candy.image.hasPrefix("http") {

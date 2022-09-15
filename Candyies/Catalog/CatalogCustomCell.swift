@@ -147,7 +147,7 @@ class CatalogCustomCell: UICollectionViewCell {
         labelCounter.translatesAutoresizingMaskIntoConstraints = false
         labelCounter.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         labelCounter.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30).isActive = true
-        
+                
         loadingView.frame          = CGRect(x: 20,
                                       y: contentView.frame.width + 20 + 30,
                                       width: contentView.frame.width - 40,
