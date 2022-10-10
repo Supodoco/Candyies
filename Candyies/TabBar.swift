@@ -14,7 +14,7 @@ class TabBar: UITabBarController {
         tabBar.backgroundColor = .white
         tabBar.tintColor = .black
         for i in 0...4 {
-            tabBar.items![i].selectedImage = tabBar.items![i].selectedImage?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
+            tabBar.items?[i].selectedImage = tabBar.items?[i].selectedImage?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
             
         }
     }

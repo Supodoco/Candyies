@@ -8,13 +8,25 @@
 import UIKit
 
 class Account: UIViewController {
+    let switchToAdmin = UISwitch()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        switchToAdmin.isOn = true
+        switchToAdmin.frame = CGRect(x: 50, y: 300, width: 120, height: 50)
+        switchToAdmin.addTarget(self, action: #selector(tapped), for: .touchUpInside)
+        view.addSubview(switchToAdmin)
+        
     }
-    
+    @objc func tapped() {
+//        navigationController?.show(LoginController(), sender: nil)
+        if switchToAdmin.isOn {
+            isAdminViewModel.shared.admin = true
+        } else {
+            isAdminViewModel.shared.admin = false
+        }
+        print(isAdminViewModel.shared.admin)
+    }
 
     /*
     // MARK: - Navigation

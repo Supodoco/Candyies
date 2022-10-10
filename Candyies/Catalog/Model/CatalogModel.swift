@@ -10,19 +10,24 @@ import UIKit
 
 struct LoadingModel: Codable {
     let image: String
-    let name: String
+    let title: String
     let weight: Int
     let price: Int
     let description: String
+    let sales: Bool
+    let id: UUID
 }
 
 struct CatalogModel: Equatable {
     let image: UIImage
-    let name: String
+    let imageDescription: String
+    let title: String
     let weight: Int
     let price: Int
     var amount: Int
     let description: String
+    let sales: Bool
+    let id: UUID
 }
 
 

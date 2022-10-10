@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		C418BFC828CFE83F00ADA32C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418BFC728CFE83F00ADA32C /* Enums.swift */; };
-		C420003328D1EE78005EBBE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420003228D1EE78005EBBE0 /* User.swift */; };
+		C420003328D1EE78005EBBE0 /* isAdmin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420003228D1EE78005EBBE0 /* isAdmin.swift */; };
 		C420003528D23D4D005EBBE0 /* DetailItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420003428D23D4D005EBBE0 /* DetailItemController.swift */; };
-		C4628FCA28CE423800B15FDB /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4628FC928CE423800B15FDB /* Singleton.swift */; };
+		C455E9AD28D3797900CFE382 /* PhosphateInline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C455E9AC28D3797900CFE382 /* PhosphateInline.ttf */; };
+		C45BB46928EEED59008C038C /* AppendToCatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45BB46828EEED59008C038C /* AppendToCatalogViewController.swift */; };
+		C4628FCA28CE423800B15FDB /* CatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4628FC928CE423800B15FDB /* CatalogViewModel.swift */; };
 		C465AFE628C4F01300D11811 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C465AFE528C4F01300D11811 /* AppDelegate.swift */; };
 		C465AFE828C4F01300D11811 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C465AFE728C4F01300D11811 /* SceneDelegate.swift */; };
 		C465AFED28C4F01300D11811 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C465AFEB28C4F01300D11811 /* Main.storyboard */; };
@@ -28,17 +30,21 @@
 		C48484AE28C7959D00C868B7 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48484AD28C7959D00C868B7 /* ItemCell.swift */; };
 		C48484B028C7AB8400C868B7 /* BuyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48484AF28C7AB8400C868B7 /* BuyCell.swift */; };
 		C48484B228C8C14D00C868B7 /* BuyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48484B128C8C14D00C868B7 /* BuyPage.swift */; };
-		C48484B428C8F5D500C868B7 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48484B328C8F5D500C868B7 /* Networking.swift */; };
+		C48484B428C8F5D500C868B7 /* CatalogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48484B328C8F5D500C868B7 /* CatalogService.swift */; };
 		C48484B828CBA0B300C868B7 /* CatalogSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48484B728CBA0B300C868B7 /* CatalogSectionHeader.swift */; };
 		C488FC2228D264EC003A9A24 /* GifExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488FC2128D264EC003A9A24 /* GifExtension.swift */; };
 		C488FC2628D266DC003A9A24 /* hungry.gif in Resources */ = {isa = PBXBuildFile; fileRef = C488FC2528D266DC003A9A24 /* hungry.gif */; };
+		C4A761DF28D324E4001B8DCC /* ParseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C4A761DE28D324E4001B8DCC /* ParseSwift */; };
+		C4A761E128D32AAC001B8DCC /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A761E028D32AAC001B8DCC /* LoginController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C418BFC728CFE83F00ADA32C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		C420003228D1EE78005EBBE0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C420003228D1EE78005EBBE0 /* isAdmin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isAdmin.swift; sourceTree = "<group>"; };
 		C420003428D23D4D005EBBE0 /* DetailItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemController.swift; sourceTree = "<group>"; };
-		C4628FC928CE423800B15FDB /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
+		C455E9AC28D3797900CFE382 /* PhosphateInline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PhosphateInline.ttf; sourceTree = "<group>"; };
+		C45BB46828EEED59008C038C /* AppendToCatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendToCatalogViewController.swift; sourceTree = "<group>"; };
+		C4628FC928CE423800B15FDB /* CatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewModel.swift; sourceTree = "<group>"; };
 		C465AFE228C4F01300D11811 /* Candyies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Candyies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C465AFE528C4F01300D11811 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C465AFE728C4F01300D11811 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,10 +64,11 @@
 		C48484AD28C7959D00C868B7 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		C48484AF28C7AB8400C868B7 /* BuyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCell.swift; sourceTree = "<group>"; };
 		C48484B128C8C14D00C868B7 /* BuyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPage.swift; sourceTree = "<group>"; };
-		C48484B328C8F5D500C868B7 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		C48484B328C8F5D500C868B7 /* CatalogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogService.swift; sourceTree = "<group>"; };
 		C48484B728CBA0B300C868B7 /* CatalogSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogSectionHeader.swift; sourceTree = "<group>"; };
 		C488FC2128D264EC003A9A24 /* GifExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifExtension.swift; sourceTree = "<group>"; };
 		C488FC2528D266DC003A9A24 /* hungry.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = hungry.gif; path = ../../../../../../.Trash/hungry.gif; sourceTree = "<group>"; };
+		C4A761E028D32AAC001B8DCC /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,12 +76,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4A761DF28D324E4001B8DCC /* ParseSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C438D49D28D6006700ACB872 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				C4A761E028D32AAC001B8DCC /* LoginController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		C465AFD928C4F01300D11811 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +112,7 @@
 			children = (
 				C465AFE528C4F01300D11811 /* AppDelegate.swift */,
 				C465AFE728C4F01300D11811 /* SceneDelegate.swift */,
+				C438D49D28D6006700ACB872 /* Login */,
 				C465B00828C4F8D300D11811 /* TabBar.swift */,
 				C465B00728C4F6FA00D11811 /* Account */,
 				C465B00428C4F6D500D11811 /* Orders */,
@@ -103,6 +120,7 @@
 				C465AFFE28C4F63700D11811 /* Catalog */,
 				C465AFFB28C4F3B800D11811 /* Gallery */,
 				C465AFEB28C4F01300D11811 /* Main.storyboard */,
+				C4A761E228D375C0001B8DCC /* Fonts */,
 				C465AFEE28C4F01500D11811 /* Assets.xcassets */,
 				C465AFF028C4F01500D11811 /* LaunchScreen.storyboard */,
 				C465AFF328C4F01500D11811 /* Info.plist */,
@@ -126,7 +144,8 @@
 				C48484A928C61B0700C868B7 /* CatalogCustomCell.swift */,
 				C48484B728CBA0B300C868B7 /* CatalogSectionHeader.swift */,
 				C420003428D23D4D005EBBE0 /* DetailItemController.swift */,
-				C48484B328C8F5D500C868B7 /* Networking.swift */,
+				C45BB46828EEED59008C038C /* AppendToCatalogViewController.swift */,
+				C48484B328C8F5D500C868B7 /* CatalogService.swift */,
 				C48484B928CBA0BE00C868B7 /* Model */,
 			);
 			path = Catalog;
@@ -163,8 +182,8 @@
 		C48484B928CBA0BE00C868B7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C4628FC928CE423800B15FDB /* Singleton.swift */,
-				C420003228D1EE78005EBBE0 /* User.swift */,
+				C4628FC928CE423800B15FDB /* CatalogViewModel.swift */,
+				C420003228D1EE78005EBBE0 /* isAdmin.swift */,
 				C48484AB28C667CD00C868B7 /* CatalogModel.swift */,
 				C418BFC728CFE83F00ADA32C /* Enums.swift */,
 			);
@@ -178,6 +197,14 @@
 				C488FC2528D266DC003A9A24 /* hungry.gif */,
 			);
 			path = Gif;
+			sourceTree = "<group>";
+		};
+		C4A761E228D375C0001B8DCC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C455E9AC28D3797900CFE382 /* PhosphateInline.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +223,9 @@
 			dependencies = (
 			);
 			name = Candyies;
+			packageProductDependencies = (
+				C4A761DE28D324E4001B8DCC /* ParseSwift */,
+			);
 			productName = Candyies;
 			productReference = C465AFE228C4F01300D11811 /* Candyies.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +254,9 @@
 				Base,
 			);
 			mainGroup = C465AFD928C4F01300D11811;
+			packageReferences = (
+				C4A761DD28D324E4001B8DCC /* XCRemoteSwiftPackageReference "Parse-Swift" */,
+			);
 			productRefGroup = C465AFE328C4F01300D11811 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -241,6 +274,7 @@
 				C465AFF228C4F01500D11811 /* LaunchScreen.storyboard in Resources */,
 				C465AFEF28C4F01500D11811 /* Assets.xcassets in Resources */,
 				C465AFED28C4F01300D11811 /* Main.storyboard in Resources */,
+				C455E9AD28D3797900CFE382 /* PhosphateInline.ttf in Resources */,
 				C488FC2628D266DC003A9A24 /* hungry.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,21 +292,23 @@
 				C465B00028C4F66000D11811 /* Cart.swift in Sources */,
 				C48484AC28C667CD00C868B7 /* CatalogModel.swift in Sources */,
 				C465AFFA28C4F3A100D11811 /* Gallery.swift in Sources */,
-				C48484B428C8F5D500C868B7 /* Networking.swift in Sources */,
+				C48484B428C8F5D500C868B7 /* CatalogService.swift in Sources */,
+				C45BB46928EEED59008C038C /* AppendToCatalogViewController.swift in Sources */,
 				C488FC2228D264EC003A9A24 /* GifExtension.swift in Sources */,
 				C465B00928C4F8D300D11811 /* TabBar.swift in Sources */,
 				C465B00328C4F6CF00D11811 /* Orders.swift in Sources */,
 				C48484AE28C7959D00C868B7 /* ItemCell.swift in Sources */,
+				C4A761E128D32AAC001B8DCC /* LoginController.swift in Sources */,
 				C465B00628C4F6EC00D11811 /* Account.swift in Sources */,
 				C48484B828CBA0B300C868B7 /* CatalogSectionHeader.swift in Sources */,
-				C4628FCA28CE423800B15FDB /* Singleton.swift in Sources */,
+				C4628FCA28CE423800B15FDB /* CatalogViewModel.swift in Sources */,
 				C48484B028C7AB8400C868B7 /* BuyCell.swift in Sources */,
 				C465AFE628C4F01300D11811 /* AppDelegate.swift in Sources */,
 				C420003528D23D4D005EBBE0 /* DetailItemController.swift in Sources */,
 				C465AFE828C4F01300D11811 /* SceneDelegate.swift in Sources */,
 				C418BFC828CFE83F00ADA32C /* Enums.swift in Sources */,
 				C48484AA28C61B0700C868B7 /* CatalogCustomCell.swift in Sources */,
-				C420003328D1EE78005EBBE0 /* User.swift in Sources */,
+				C420003328D1EE78005EBBE0 /* isAdmin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +530,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C4A761DD28D324E4001B8DCC /* XCRemoteSwiftPackageReference "Parse-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/parse-community/Parse-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C4A761DE28D324E4001B8DCC /* ParseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4A761DD28D324E4001B8DCC /* XCRemoteSwiftPackageReference "Parse-Swift" */;
+			productName = ParseSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C465AFDA28C4F01300D11811 /* Project object */;
 }

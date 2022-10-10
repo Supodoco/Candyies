@@ -20,13 +20,11 @@ class ItemCell: UITableViewCell {
     var labelName: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        label.text = "Napoleon"
         return label
     }()
     let labelCost: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        label.text = "1200 P"
         return label
     }()
     let viewBack: UIView = {

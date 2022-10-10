@@ -22,6 +22,8 @@ class Catalog: UIViewController {
     
     var collectionCatalog: UICollectionView?
     
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,12 +34,19 @@ class Catalog: UIViewController {
         labelsConfigure()
         labelsMakeConstraints()
         modelConfigure()
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionCatalog?.addSubview(refreshControl)
     }
-    
+    @objc func refresh() {
+        CatalogViewModel.shared.catalog = []
+        modelConfigure()
+        refreshControl.endRefreshing()
+    }
     override func viewWillAppear(_ animated: Bool) {
         labelsConfigure()
         collectionCatalog?.reloadData()
-        if Singleton.shared.cartTotalPrice == 0 {
+        if CatalogViewModel.shared.cartTotalPrice == 0 {
             viewTotalSumAndDeliveryCost.isHidden = true
         }
         
@@ -146,7 +155,7 @@ class Catalog: UIViewController {
         labelDelivery.text = deliveryCounting()
         labelDelivery.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         labelDelivery.textColor = .systemGray
-        labelTotalSum.text = "\(Singleton.shared.cartTotalPrice) ₽"
+        labelTotalSum.text = "\(CatalogViewModel.shared.cartTotalPrice) ₽"
     }
     private func labelsMakeConstraints() {
         labelDelivery.translatesAutoresizingMaskIntoConstraints = false
@@ -180,26 +189,16 @@ class Catalog: UIViewController {
     }
     
     private func deliveryCounting() -> String {
-        Singleton.shared.freeDeliveryMinSum - Singleton.shared.cartTotalPrice <= 0 ?
-        "Бесплатная доставка" : "\(Singleton.shared.freeDeliveryMinSum - Singleton.shared.cartTotalPrice) ₽ до бесплатной доставки"
+        CatalogViewModel.shared.freeDeliveryMinSum - CatalogViewModel.shared.cartTotalPrice <= 0 ?
+        "Бесплатная доставка" : "\(CatalogViewModel.shared.freeDeliveryMinSum - CatalogViewModel.shared.cartTotalPrice) ₽ до бесплатной доставки"
     }
     private func modelConfigure() {
-        Networking.shared.loadData(0, url: salesDataUrl) {
-            DispatchQueue.main.async {
-                self.collectionCatalog?.reloadData()
-                print("Reload Interface - Sales")
-                Singleton.shared.loaded.0 = true
-                print(Singleton.shared.loaded.0)
-                print(Singleton.shared.sectionOne)
-            }
-        }
-        Networking.shared.loadData(1, url: catalogDataUrl) {
+        CatalogService.shared.loadData(url: CatalogService.shared.catalogVaporURL) {
             DispatchQueue.main.async {
                 self.collectionCatalog?.reloadData()
                 print("Reload Interface - Catalog")
-                Singleton.shared.loaded.1 = true
-                print(Singleton.shared.loaded.1)
-                print(Singleton.shared.sectionTwo)
+                CatalogViewModel.shared.loaded.0 = true
+                CatalogViewModel.shared.loaded.1 = true
             }
         }
     }
@@ -213,12 +212,17 @@ class Catalog: UIViewController {
     }
     
     
-    func modelCalculateAmount(_ indexPath: IndexPath, _ calculate: Counter) {
-        let counter = returnCounter(indexPath)
-        if calculate == .plus {
-            Singleton.shared.data[indexPath.row + counter]?.amount += 1
+    private func modelCalculateAmount(_ indexPath: IndexPath, _ calculate: Counter) {
+        if indexPath.section == 0 {
+            CatalogViewModel.shared.changeAmount(
+                id: CatalogViewModel.shared.sectionOne[indexPath.row].id,
+                calculate: calculate
+            )
         } else {
-            Singleton.shared.data[indexPath.row + counter]?.amount -= 1
+            CatalogViewModel.shared.changeAmount(
+                id: CatalogViewModel.shared.sectionTwo[indexPath.row].id,
+                calculate: calculate
+            )
         }
     }
     
@@ -232,33 +236,19 @@ class Catalog: UIViewController {
     
     @objc func plusOne(sender: UITapGestureRecognizer) {
         guard let indexPath = returnIndexPath(sender) else { return }
-        let counter = returnCounter(indexPath)
-        if let amount = Singleton.shared.data[indexPath.row + counter]?.amount {
-            if amount < 20 {
-                modelCalculateAmount(indexPath, .plus)
-                labelsConfigure()
-                collectionCatalog?.reloadData()
-            }
-        }
+            modelCalculateAmount(indexPath, .plus)
+            labelsConfigure()
+            collectionCatalog?.reloadData()
     }
     
     @objc func minusOne(sender: UITapGestureRecognizer) {
         guard let indexPath = returnIndexPath(sender) else { return }
-        let counter = returnCounter(indexPath)
-        if let amount = Singleton.shared.data[indexPath.row + counter]?.amount {
-            if amount > 0 {
-                modelCalculateAmount(indexPath, .minus)
-                if Singleton.shared.cartTotalPrice == 0 {
-                    viewTotalSumAndDeliveryCost.isHidden = true
-                }
-                labelsConfigure()
-                collectionCatalog?.reloadData()
+            modelCalculateAmount(indexPath, .minus)
+            if CatalogViewModel.shared.cartTotalPrice == 0 {
+                viewTotalSumAndDeliveryCost.isHidden = true
             }
-        }
-    }
-    
-    func returnCounter(_ indexPath: IndexPath) -> Int {
-        indexPath.section == 0 ? 0 : Singleton.shared.counter
+            labelsConfigure()
+            collectionCatalog?.reloadData()
     }
     
 }
@@ -266,13 +256,13 @@ class Catalog: UIViewController {
 extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if Singleton.shared.data.isEmpty {
+        if CatalogViewModel.shared.catalog.isEmpty {
             return 6
         } else {
             if section == 0 {
-                return Singleton.shared.sectionOne.count
+                return CatalogViewModel.shared.sectionOne.count
             } else {
-                return Singleton.shared.sectionTwo.count
+                return CatalogViewModel.shared.sectionTwo.count
             }
         }
     }
@@ -286,16 +276,15 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
             for: indexPath
         ) as? CatalogCustomCell else { return UICollectionViewCell() }
         
-        if !Singleton.shared.sectionTwo.isEmpty && !Singleton.shared.sectionOne.isEmpty {
+        if !CatalogViewModel.shared.sectionTwo.isEmpty && !CatalogViewModel.shared.sectionOne.isEmpty {
             print("Collections Configure")
-            let sec = indexPath.section == 0 ? Singleton.shared.sectionOne : Singleton.shared.sectionTwo
-            let counter = returnCounter(indexPath)
+            let sec = indexPath.section == 0 ? CatalogViewModel.shared.sectionOne : CatalogViewModel.shared.sectionTwo
             
-            cell.configure(image: sec[indexPath.row + counter]?.image ?? UIImage(named: "imgDefault") ?? UIImage(),
-                           name: sec[indexPath.row + counter]?.name ?? "Тортик",
-                           weight: sec[indexPath.row + counter]?.weight ?? 0,
-                           amount: sec[indexPath.row + counter]?.amount ?? 0,
-                           description: sec[indexPath.row + counter]?.description ?? ""
+            cell.configure(image: sec[indexPath.row].image,
+                           name: sec[indexPath.row].title,
+                           weight: sec[indexPath.row].weight,
+                           amount: sec[indexPath.row].amount,
+                           description: sec[indexPath.row].description
             )
             
             cell.loadingView.isHidden = true
@@ -306,10 +295,10 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.buttonPlus  = cell.buttonConfigure(cell.buttonPlus, setTitle: "+")
             cell.buttonPrice = cell.buttonConfigure(
                 cell.buttonPrice,
-                setTitle: "\(sec[indexPath.row + counter]?.price ?? 1000) ₽"
+                setTitle: "\(sec[indexPath.row].price) ₽"
             )
             
-            if sec[indexPath.row + counter]?.amount == 0 {
+            if sec[indexPath.row].amount == 0 {
                 cell.buttonPrice.isHidden = false
                 cell.buttonPlus.isHidden = true
                 cell.buttonMinus.isHidden = true
@@ -340,7 +329,7 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.buttonMinus.addGestureRecognizer(gestureMinusCount)
             
             
-        } else if !Singleton.shared.loaded.0 && !Singleton.shared.loaded.1 {
+        } else if !CatalogViewModel.shared.loaded.0 && !CatalogViewModel.shared.loaded.1 {
             Timer.scheduledTimer(withTimeInterval: 1.4, repeats: true) { timer in
                 UIView.animate(withDuration: 0.6) {
                     cell.imageView.alpha = 0.5
@@ -353,7 +342,7 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
                         cell.loadingView.alpha = 0.9
                     }
                 }
-                if Singleton.shared.loaded.0 && Singleton.shared.loaded.1 {
+                if CatalogViewModel.shared.loaded.0 && CatalogViewModel.shared.loaded.1 {
                     timer.invalidate()
                     cell.imageView.layer.removeAllAnimations()
                     cell.loadingViewSecond.layer.removeAllAnimations()
@@ -372,11 +361,15 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
         UIView.animate(withDuration: 0.2, animations: {
             cell.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
         }, completion: { finished in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let detailItem = storyboard.instantiateViewController(identifier: "DetailItem") as? DetailItemController else { return }
-            
-            detailItem.image.image = cell.imageView.image
-            detailItem.label.text = "\(cell.nameOfItem.text ?? "") · \(cell.weightOfItem.text ?? "")" + "\(cell.desriptionData.text!.count > 0 ? " · \(cell.desriptionData.text ?? "")" : "")"
+            print("sec - \(indexPath.section), row - \(indexPath.row)")
+            let sec = indexPath.section == 0 ? CatalogViewModel.shared.sectionOne : CatalogViewModel.shared.sectionTwo
+            let cellData = sec[indexPath.row]
+            let detailItem = DetailItemController(
+                image: cell.imageView.image ?? UIImage(),
+                label: "\(cell.nameOfItem.text ?? "") · \(cell.weightOfItem.text ?? "")"
+                + "\(cell.desriptionData.text!.count > 0 ? " · \(cell.desriptionData.text ?? "")" : "")",
+                cellData: cellData
+            )
             self.present(detailItem, animated: true)
             UIView.animate(withDuration: 0.2) {
                 cell.transform = .identity
@@ -391,9 +384,21 @@ extension Catalog: UICollectionViewDelegate, UICollectionViewDataSource {
             withReuseIdentifier: CatalogSectionHeader.identifier,
             for: indexPath) as? CatalogSectionHeader
         else { return CatalogSectionHeader() }
-        
+        print("header")
         headerView.label.text = indexPath.section == 0 ? Titles.sales.rawValue : Titles.catalog.rawValue
-        
+        headerView.editButton.addTarget(self, action: #selector(appendToCatalog), for: .touchUpInside)
+        if isAdminViewModel.shared.admin {
+            headerView.editButton.isHidden = false
+        } else {
+            headerView.editButton.isHidden = true
+        }
         return headerView
+    }
+    @objc private func appendToCatalog() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let editScreen = storyboard.instantiateViewController(
+            withIdentifier: "AppendToCatalogViewController") as? AppendToCatalogViewController
+        else { return }
+        present(editScreen, animated: true)
     }
 }

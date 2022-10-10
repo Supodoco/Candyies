@@ -28,6 +28,7 @@ class Cart: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
+        print(CatalogViewModel.shared.cart)
     }
     
     func buttonTrashConfigure() {
@@ -44,7 +45,7 @@ class Cart: UIViewController {
         ])
     }
     @objc func clearCart() {
-        Singleton.shared.clearCart()
+        CatalogViewModel.shared.clearCart()
         let duration = 0.15
         UIView.animate(withDuration: duration, delay: 0) {
             self.buttonTrash.transform = CGAffineTransform(rotationAngle: .pi/6)
@@ -95,43 +96,40 @@ class Cart: UIViewController {
     }
     
     
-    @objc func plusOne(sender: UITapGestureRecognizer) {
-        let position = sender.location(in: tableView)
-        if let indexPath = tableView.indexPathForRow(at: position) {
-            if Singleton.shared.cartArray[indexPath.row].amount < 30 {
-                let t = Singleton.shared.cartArray[indexPath.row]
-                for i in Singleton.shared.cart {
-                    if t == i.value {
-                        Singleton.shared.data[i.key]?.amount += 1
-                    }
-                }
-            }
-            tableView.reloadData()
-        }
+    @objc private func plusOne(sender: UITapGestureRecognizer) {
+        guard let indexPath = getPosition(sender) else { return }
+        CatalogViewModel.shared.changeAmount(
+            id: CatalogViewModel.shared.cart[indexPath.row].id,
+            calculate: .plus
+        )
+        tableView.reloadData()
     }
     
-    @objc func minusOne(sender: UITapGestureRecognizer) {
+    @objc private func minusOne(sender: UITapGestureRecognizer) {
+        guard let indexPath = getPosition(sender) else { return }
+        CatalogViewModel.shared.changeAmount(
+            id: CatalogViewModel.shared.cart[indexPath.row].id,
+            calculate: .minus
+        )
+        tableView.reloadData()
+    }
+    private func getPosition(_ sender: UITapGestureRecognizer) -> IndexPath? {
         let position = sender.location(in: tableView)
         if let indexPath = tableView.indexPathForRow(at: position) {
-            let t = Singleton.shared.cartArray[indexPath.row]
-            for i in Singleton.shared.cart {
-                if t == i.value {
-                    Singleton.shared.data[i.key]?.amount -= 1
-                }
-            }
-            tableView.reloadData()
+            return indexPath
+        } else {
+            return nil
         }
     }
     
     @objc func buy(sender: UITapGestureRecognizer) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let buyPage = storyboard.instantiateViewController(identifier: "BuyPage") as? BuyPage else { return }
+        let buyPage = BuyPage()
         present(buyPage, animated: true)
     }
     
-    func deliveryCount() -> Int {
-        Singleton.shared.cartTotalPrice > Singleton.shared.freeDeliveryMinSum
-        ? Singleton.shared.delivery.free : Singleton.shared.delivery.cost
+    private func deliveryCount() -> Int {
+        CatalogViewModel.shared.cartTotalPrice > CatalogViewModel.shared.freeDeliveryMinSum
+        ? CatalogViewModel.shared.delivery.free : CatalogViewModel.shared.delivery.cost
     }
 }
 
@@ -140,7 +138,7 @@ extension Cart: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        if Singleton.shared.cart.isEmpty {
+        if CatalogViewModel.shared.cart.isEmpty {
             let cell = UITableViewCell()
             let label: UILabel = {
                 let label = UILabel()
@@ -166,18 +164,18 @@ extension Cart: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
-        if indexPath.row < Singleton.shared.cart.count {
+        if indexPath.row < CatalogViewModel.shared.cart.count {
             tableView.isScrollEnabled = true
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: ItemCell.identifier,
                 for: indexPath) as? ItemCell else { return UITableViewCell() }
-            print("indexPath --- \(indexPath.row)")
-            cell.image.image = Singleton.shared.cartArray[indexPath.row].image
-            cell.labelCost.text = String(Singleton.shared.cartArray[indexPath.row].price * Singleton.shared.cartArray[indexPath.row].amount) + " ₽"
-            cell.labelName.text = Singleton.shared.cartArray[indexPath.row].name
+
+            cell.image.image = CatalogViewModel.shared.cart[indexPath.row].image
+            cell.labelCost.text = String(CatalogViewModel.shared.cart[indexPath.row].price * CatalogViewModel.shared.cart[indexPath.row].amount) + " ₽"
+            cell.labelName.text = CatalogViewModel.shared.cart[indexPath.row].title
             cell.buttonsMinus = CatalogCustomCell().buttonConfigure(cell.buttonsMinus, setTitle: "-")
             cell.buttonPlus = CatalogCustomCell().buttonConfigure(cell.buttonPlus, setTitle: "+")
-            cell.buttonCounter.setTitle("\(Singleton.shared.cartArray[indexPath.row].amount)", for: .normal)
+            cell.buttonCounter.setTitle("\(CatalogViewModel.shared.cart[indexPath.row].amount)", for: .normal)
             cell.buttonCounter.setTitleColor(UIColor.black, for: .normal)
             
             
@@ -194,7 +192,7 @@ extension Cart: UITableViewDelegate, UITableViewDataSource {
             cell.buttonsMinus.addGestureRecognizer(gestureMinus)
             
             return cell
-        } else if indexPath.row == Singleton.shared.cart.count {
+        } else if indexPath.row == CatalogViewModel.shared.cart.count {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: BuyCell.identifier,
                 for: indexPath) as? BuyCell
@@ -210,7 +208,7 @@ extension Cart: UITableViewDelegate, UITableViewDataSource {
                 for: indexPath) as? BuyCell
             else { return UITableViewCell() }
 
-            cell.labelCost.text = "\(Singleton.shared.cartTotalPrice + deliveryCount()) ₽"
+            cell.labelCost.text = "\(CatalogViewModel.shared.cartTotalPrice + deliveryCount()) ₽"
             cell.buttonConfigure(.systemGreen)
             
             let gestureBuy = UITapGestureRecognizer(
@@ -224,15 +222,15 @@ extension Cart: UITableViewDelegate, UITableViewDataSource {
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Singleton.shared.cart.isEmpty  {
+        if CatalogViewModel.shared.cart.isEmpty  {
             return 1
         } else {
-            return Singleton.shared.cart.count + 2
+            return CatalogViewModel.shared.cart.count + 2
         }
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row < Singleton.shared.cart.count {
+        if indexPath.row < CatalogViewModel.shared.cart.count {
             return 130
         } else {
             return 60
