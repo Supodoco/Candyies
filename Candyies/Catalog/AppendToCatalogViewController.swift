@@ -114,7 +114,10 @@ class AppendToCatalogViewController: UIViewController {
               let weight = Int(weightTF.text!),
               let description = descriptionTextView.text
         else {
-            customAlertShow(title: "Ошибка", message: "Некоторые поля заполнены неверно или пусты")
+            customAlertShow(
+                title: "Ошибка",
+                message: "Некоторые поля заполнены неверно или пусты",
+                cancelAction: false)
             return
         }
         let sales = categorySegmentControl.selectedSegmentIndex == 0 ? true : false
@@ -128,7 +131,9 @@ class AppendToCatalogViewController: UIViewController {
                 description: description,
                 sales: sales,
                 id: cellData.id)) {
-                    self.customAlertShow(title: "Текущий товар", message: "Успешно обновлён") {
+                    self.customAlertShow(
+                        title: "Текущий товар",
+                        message: "Обновить информацию о товаре?") {
                         self.dismiss(animated: true)
                     }
                 }
@@ -140,7 +145,9 @@ class AppendToCatalogViewController: UIViewController {
                 weight: weight,
                 sales: sales,
                 description: description) {
-                    self.customAlertShow(title: "Новый товар", message: "Успешно добавлен") {
+                    self.customAlertShow(
+                        title: "Новый товар",
+                        message: "Добавить новый товар?") {
                         self.dismiss(animated: true)
                     }
                 }
@@ -150,18 +157,24 @@ class AppendToCatalogViewController: UIViewController {
     }
     @IBAction func deleteButtonTapped() {
         CatalogService.shared.deleteHandler(id: cellData.id) {
-            self.customAlertShow(title: "Выбранный товар", message: "Успешно удалён") {
+            self.customAlertShow(
+                title: "Выбранный товар",
+                message: "Удалить выбранный товар?") {
                 self.dismiss(animated: true)
             }
         }
         
     }
-    func customAlertShow(title: String, message: String, action: (() -> ())? = nil) {
+    func customAlertShow(title: String, message: String, cancelAction: Bool = true, action: (() -> ())? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .default) { _ in
+        let alertActionOk = UIAlertAction(title: "OK", style: .default) { _ in
             action?()
         }
-        alert.addAction(alertAction)
+        let alertActionCancel = UIAlertAction(title: "Отмена", style: .cancel)
+        if cancelAction {
+            alert.addAction(alertActionCancel)
+        }
+        alert.addAction(alertActionOk)
         self.present(alert, animated: true)
     }
 }

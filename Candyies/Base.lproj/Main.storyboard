@@ -123,7 +123,7 @@
                     <tabBarItem key="tabBarItem" title="Профиль" image="person.fill" catalog="system" id="kQD-TM-vSk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3j6-fT-edM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -140,7 +140,7 @@
             <objects>
                 <viewController storyboardIdentifier="AppendToCatalogViewController" id="eG7-pX-YrH" customClass="AppendToCatalogViewController" customModule="Candyies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cbx-kY-K0P">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="980"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="961"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDU-OC-4kK">
@@ -330,11 +330,11 @@
                             <constraint firstItem="yDU-OC-4kK" firstAttribute="top" secondItem="XFO-14-10n" secondAttribute="bottom" constant="8.5" id="9sQ-8Z-PZR"/>
                             <constraint firstItem="XFO-14-10n" firstAttribute="centerX" secondItem="K1I-a6-XER" secondAttribute="centerX" id="Mou-dn-uuI"/>
                             <constraint firstItem="yDU-OC-4kK" firstAttribute="trailing" secondItem="K1I-a6-XER" secondAttribute="trailing" id="U2u-Iv-fW8"/>
-                            <constraint firstItem="K1I-a6-XER" firstAttribute="bottom" secondItem="yDU-OC-4kK" secondAttribute="bottom" constant="19" id="dgH-Zm-cBm"/>
+                            <constraint firstItem="K1I-a6-XER" firstAttribute="bottom" secondItem="yDU-OC-4kK" secondAttribute="bottom" id="dgH-Zm-cBm"/>
                             <constraint firstItem="yDU-OC-4kK" firstAttribute="leading" secondItem="K1I-a6-XER" secondAttribute="leading" id="wsk-ch-kBL"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="320" height="980"/>
+                    <size key="freeformSize" width="320" height="961"/>
                     <connections>
                         <outlet property="categorySegmentControl" destination="2jr-hV-o0t" id="FfS-Rs-yTi"/>
                         <outlet property="deleteButton" destination="oq4-SP-N0J" id="yJH-fg-1Rk"/>

@@ -25,7 +25,7 @@ class CatalogService {
     
     func loadData(url: String, closure: @escaping () -> ()) {
         guard let url = URL(string: url) else { return }
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 print("ERROR: \(error.localizedDescription)")
             }
