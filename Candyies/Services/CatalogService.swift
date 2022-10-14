@@ -23,8 +23,8 @@ class CatalogService {
         closure(loadedImage)
     }
     
-    func loadData(url: String, closure: @escaping () -> ()) {
-        guard let url = URL(string: url) else { return }
+    func loadData(closure: @escaping () -> ()) {
+        guard let url = URL(string: catalogVaporURL) else { return }
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 print("ERROR: \(error.localizedDescription)")
@@ -126,13 +126,27 @@ class CatalogService {
     }
     
     func updateHandler(
-        loadingModel: LoadingModel,
+        image: String,
+        title: String,
+        price: Int,
+        weight: Int,
+        sales: Bool,
+        description: String,
+        id: UUID,
         closure: @escaping () -> ()
     ) {
-        guard let link = URL(string: catalogVaporURL + "/" + loadingModel.id.uuidString)
+        let postData = LoadingModel(
+            image: image,
+            title: title,
+            weight: weight,
+            price: price,
+            description: description,
+            sales: sales,
+            id: id)
+        guard let link = URL(string: catalogVaporURL + "/" + postData.id.uuidString)
         else { return }
         print(link)
-        let encodedData = try? JSONEncoder().encode(loadingModel)
+        let encodedData = try? JSONEncoder().encode(postData)
         var request = URLRequest(url: link)
         request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

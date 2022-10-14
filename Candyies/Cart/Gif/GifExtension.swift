@@ -29,9 +29,3 @@ extension UIImageView {
     }
 }
 
-
-//guard let confettiImageView = UIImageView.fromGif(frame: CGRect(x: 30, y: 30, width: 200, height: 200), resourceName: "hungry") else { return }
-//view.addSubview(confettiImageView)
-//confettiImageView.animationDuration = 3
-//confettiImageView.animationRepeatCount = 1
-//confettiImageView.startAnimating()

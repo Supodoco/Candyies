@@ -24,6 +24,7 @@
 		C465B00328C4F6CF00D11811 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C465B00228C4F6CF00D11811 /* Orders.swift */; };
 		C465B00628C4F6EC00D11811 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = C465B00528C4F6EC00D11811 /* Account.swift */; };
 		C465B00928C4F8D300D11811 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C465B00828C4F8D300D11811 /* TabBar.swift */; };
+		C4816A7E28F9BD9900C8B94B /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4816A7D28F9BD9900C8B94B /* Extension + UIButton.swift */; };
 		C48484A828C51D5100C868B7 /* GalleryCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48484A728C51D5100C868B7 /* GalleryCustomCell.swift */; };
 		C48484AA28C61B0700C868B7 /* CatalogCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48484A928C61B0700C868B7 /* CatalogCustomCell.swift */; };
 		C48484AC28C667CD00C868B7 /* CatalogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48484AB28C667CD00C868B7 /* CatalogModel.swift */; };
@@ -58,6 +59,7 @@
 		C465B00228C4F6CF00D11811 /* Orders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
 		C465B00528C4F6EC00D11811 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		C465B00828C4F8D300D11811 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		C4816A7D28F9BD9900C8B94B /* Extension + UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
 		C48484A728C51D5100C868B7 /* GalleryCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCustomCell.swift; sourceTree = "<group>"; };
 		C48484A928C61B0700C868B7 /* CatalogCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCustomCell.swift; sourceTree = "<group>"; };
 		C48484AB28C667CD00C868B7 /* CatalogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogModel.swift; sourceTree = "<group>"; };
@@ -112,17 +114,19 @@
 			children = (
 				C465AFE528C4F01300D11811 /* AppDelegate.swift */,
 				C465AFE728C4F01300D11811 /* SceneDelegate.swift */,
-				C438D49D28D6006700ACB872 /* Login */,
 				C465B00828C4F8D300D11811 /* TabBar.swift */,
-				C465B00728C4F6FA00D11811 /* Account */,
-				C465B00428C4F6D500D11811 /* Orders */,
-				C465B00128C4F6A100D11811 /* Cart */,
-				C465AFFE28C4F63700D11811 /* Catalog */,
+				C438D49D28D6006700ACB872 /* Login */,
 				C465AFFB28C4F3B800D11811 /* Gallery */,
-				C465AFEB28C4F01300D11811 /* Main.storyboard */,
+				C465AFFE28C4F63700D11811 /* Catalog */,
+				C465B00128C4F6A100D11811 /* Cart */,
+				C465B00428C4F6D500D11811 /* Orders */,
+				C465B00728C4F6FA00D11811 /* Account */,
+				C4816A7C28F9AA6300C8B94B /* Services */,
 				C4A761E228D375C0001B8DCC /* Fonts */,
-				C465AFEE28C4F01500D11811 /* Assets.xcassets */,
+				C4816A7F28F9BD9E00C8B94B /* Extensions */,
+				C465AFEB28C4F01300D11811 /* Main.storyboard */,
 				C465AFF028C4F01500D11811 /* LaunchScreen.storyboard */,
+				C465AFEE28C4F01500D11811 /* Assets.xcassets */,
 				C465AFF328C4F01500D11811 /* Info.plist */,
 			);
 			path = Candyies;
@@ -141,11 +145,9 @@
 			isa = PBXGroup;
 			children = (
 				C465AFFC28C4F63000D11811 /* Catalog.swift */,
-				C48484A928C61B0700C868B7 /* CatalogCustomCell.swift */,
-				C48484B728CBA0B300C868B7 /* CatalogSectionHeader.swift */,
-				C420003428D23D4D005EBBE0 /* DetailItemController.swift */,
-				C45BB46828EEED59008C038C /* AppendToCatalogViewController.swift */,
-				C48484B328C8F5D500C868B7 /* CatalogService.swift */,
+				C4816A7928F9A9D600C8B94B /* Cells */,
+				C4816A7A28F9A9E200C8B94B /* Headers */,
+				C4816A7B28F9AA2600C8B94B /* CatalogVCs */,
 				C48484B928CBA0BE00C868B7 /* Model */,
 			);
 			path = Catalog;
@@ -155,8 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				C465AFFF28C4F66000D11811 /* Cart.swift */,
-				C48484AD28C7959D00C868B7 /* ItemCell.swift */,
-				C48484AF28C7AB8400C868B7 /* BuyCell.swift */,
+				C4816A7828F9A9C000C8B94B /* Cells */,
 				C48484B128C8C14D00C868B7 /* BuyPage.swift */,
 				C488FC2028D264D1003A9A24 /* Gif */,
 			);
@@ -177,6 +178,56 @@
 				C465B00528C4F6EC00D11811 /* Account.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		C4816A7828F9A9C000C8B94B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C48484AD28C7959D00C868B7 /* ItemCell.swift */,
+				C48484AF28C7AB8400C868B7 /* BuyCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		C4816A7928F9A9D600C8B94B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C48484A928C61B0700C868B7 /* CatalogCustomCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		C4816A7A28F9A9E200C8B94B /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				C48484B728CBA0B300C868B7 /* CatalogSectionHeader.swift */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		C4816A7B28F9AA2600C8B94B /* CatalogVCs */ = {
+			isa = PBXGroup;
+			children = (
+				C420003428D23D4D005EBBE0 /* DetailItemController.swift */,
+				C45BB46828EEED59008C038C /* AppendToCatalogViewController.swift */,
+			);
+			path = CatalogVCs;
+			sourceTree = "<group>";
+		};
+		C4816A7C28F9AA6300C8B94B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C48484B328C8F5D500C868B7 /* CatalogService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C4816A7F28F9BD9E00C8B94B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C4816A7D28F9BD9900C8B94B /* Extension + UIButton.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C48484B928CBA0BE00C868B7 /* Model */ = {
@@ -293,6 +344,7 @@
 				C48484AC28C667CD00C868B7 /* CatalogModel.swift in Sources */,
 				C465AFFA28C4F3A100D11811 /* Gallery.swift in Sources */,
 				C48484B428C8F5D500C868B7 /* CatalogService.swift in Sources */,
+				C4816A7E28F9BD9900C8B94B /* Extension + UIButton.swift in Sources */,
 				C45BB46928EEED59008C038C /* AppendToCatalogViewController.swift in Sources */,
 				C488FC2228D264EC003A9A24 /* GifExtension.swift in Sources */,
 				C465B00928C4F8D300D11811 /* TabBar.swift in Sources */,

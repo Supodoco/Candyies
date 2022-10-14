@@ -20,11 +20,13 @@ class ItemCell: UITableViewCell {
     var labelName: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.numberOfLines = 2
         return label
     }()
     let labelCost: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textAlignment = .right
         return label
     }()
     let viewBack: UIView = {
@@ -63,14 +65,22 @@ class ItemCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        viewBack.frame = CGRect(x: 7, y: 7, width: contentView.frame.width - 14, height: contentView.frame.height - 14)
-        image.frame    = CGRect(x: 13, y: 13, width: contentView.frame.height - 26, height: contentView.frame.height - 26)
-        labelName.frame = CGRect(x: contentView.frame.height, y: 13, width: 150, height: 20)
+        viewBack.frame  = CGRect(x: 7, y: 7, width: contentView.frame.width - 14, height: contentView.frame.height - 14)
+        image.frame     = CGRect(x: 13, y: 13, width: contentView.frame.height - 26, height: contentView.frame.height - 26)
         
+        labelName.translatesAutoresizingMaskIntoConstraints = false
         labelCost.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            labelCost.trailingAnchor.constraint(equalTo: viewBack.trailingAnchor, constant: -10),
-            labelCost.topAnchor.constraint(equalTo: viewBack.topAnchor, constant: 8)
+            
+            labelCost.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -13),
+            labelCost.topAnchor.constraint(equalTo: topAnchor, constant: 13),
+            labelCost.widthAnchor.constraint(equalToConstant: 80),
+            
+            labelName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: contentView.frame.height),
+            labelName.topAnchor.constraint(equalTo: topAnchor, constant: 13),
+            labelName.trailingAnchor.constraint(equalTo: labelCost.leadingAnchor)
+            
+            
         ])
         let blockHeight: CGFloat = 67
         let size: CGFloat = 45

@@ -45,7 +45,7 @@ class CatalogSectionHeader: UICollectionReusableView {
     
     private func editButtonConfigure() {
         let configureImage = UIImage.SymbolConfiguration(pointSize: 30, weight: .semibold, scale: .medium)
-        let image = UIImage(systemName: "plus.viewfinder", withConfiguration: configureImage)?
+        let image = UIImage(named: "plus.viewfinder", in: nil, with: configureImage)?
             .withTintColor(.black)
             .withRenderingMode(.alwaysOriginal)
             

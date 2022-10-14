@@ -11,9 +11,9 @@ class CatalogViewModel {
     static let shared = CatalogViewModel()
     var catalog: [CatalogModel] = []
     let delivery: (cost: Int, free: Int) = (200,0)
-    let freeDeliveryMinSum = 2300
-    var loaded = (false, false)
-    
+    let freeDeliveryMinSum = 3300
+    var loaded = false
+
     var sectionOne: [CatalogModel] {
         catalog.filter { $0.sales }
     }
@@ -24,7 +24,7 @@ class CatalogViewModel {
         catalog.filter { $0.amount > 0 }
     }
     var cartTotalPrice: Int {
-        catalog.map { $0.price * $0.amount }.reduce(0, +)
+        cart.map { $0.price * $0.amount }.reduce(0, +)
     }
     
     private init() { }

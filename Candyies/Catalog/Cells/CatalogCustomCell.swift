@@ -45,17 +45,7 @@ class CatalogCustomCell: UICollectionViewCell {
     var buttonMinus = UIButton()
     var buttonPlus = UIButton()
     
-    func buttonConfigure(_ button: UIButton, setTitle: String) -> UIButton {
-        button.backgroundColor = .white
-        button.setTitle(setTitle, for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.layer.cornerRadius = 8
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowRadius = 7
-        button.layer.shadowOpacity = 0.2
-        button.layer.shadowOffset = .zero
-        return button
-    }
+    
     
     
     let labelCounter = UILabel()
@@ -104,6 +94,14 @@ class CatalogCustomCell: UICollectionViewCell {
         labelCounter.text   = String(amount)
         desriptionData.text = description
     }
+    func hideElements(_ bool: Bool) {
+        weightOfItem.isHidden = bool
+        buttonPrice.isHidden = bool
+        nameOfItem.isHidden = bool
+        buttonMinus.isHidden = bool
+        buttonPlus.isHidden = bool
+        labelCounter.isHidden = bool
+    }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -146,7 +144,7 @@ class CatalogCustomCell: UICollectionViewCell {
         
         labelCounter.translatesAutoresizingMaskIntoConstraints = false
         labelCounter.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        labelCounter.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30).isActive = true
+        labelCounter.centerYAnchor.constraint(equalTo: buttonPlus.centerYAnchor).isActive = true
                 
         loadingView.frame          = CGRect(x: 20,
                                       y: contentView.frame.width + 20 + 30,
@@ -158,3 +156,4 @@ class CatalogCustomCell: UICollectionViewCell {
                                       height: 40)
     }
 }
+

@@ -15,7 +15,8 @@ class AppendToCatalogViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var titleLabel: UILabel!
     
-    @IBOutlet var imageView: UIImageView! {
+    @IBOutlet var imageView: UIImageView!
+    {
         didSet {
             if let _ = cellData {
                 imageView.image = cellData.image
@@ -49,6 +50,7 @@ class AppendToCatalogViewController: UIViewController {
             } else {
                 selectedImage = cellData.imageDescription
             }
+            imageView.image = cellData.image
             titleTF.text = cellData.title
             priceTF.text = String(cellData.price)
             weightTF.text = String(cellData.weight)
@@ -60,7 +62,6 @@ class AppendToCatalogViewController: UIViewController {
         descriptionTextView.layer.cornerRadius = 8
         imagePicker.delegate = self
         imagePicker.dataSource = self
-        imageView.image = UIImage(named: selectedImage)
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
@@ -83,14 +84,13 @@ class AppendToCatalogViewController: UIViewController {
         }
     }
     func addDoneButtonOnKeyboard() {
-        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        let doneToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
         
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(self.doneButtonAction))
+        let done = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(doneButtonAction))
         
-        let items = [flexSpace, done]
-        doneToolbar.items = items
+        doneToolbar.items = [flexSpace, done]
         doneToolbar.sizeToFit()
         
         titleTF.inputAccessoryView = doneToolbar
@@ -117,25 +117,26 @@ class AppendToCatalogViewController: UIViewController {
             customAlertShow(
                 title: "Ошибка",
                 message: "Некоторые поля заполнены неверно или пусты",
-                cancelAction: false)
+                cancelAction: false
+            )
             return
         }
         let sales = categorySegmentControl.selectedSegmentIndex == 0 ? true : false
 
-        if updateButton.tintColor == .systemGreen {
-            CatalogService.shared.updateHandler(loadingModel: LoadingModel(
+        if !deleteButton.isHidden {
+            CatalogService.shared.updateHandler(
                 image: image,
                 title: title,
-                weight: weight,
                 price: price,
-                description: description,
+                weight: weight,
                 sales: sales,
-                id: cellData.id)) {
+                description: description,
+                id: cellData.id) {
                     self.customAlertShow(
                         title: "Текущий товар",
-                        message: "Обновить информацию о товаре?") {
-                        self.dismiss(animated: true)
-                    }
+                        message: "Обновить информацию о товаре?",
+                        target: self
+                    )
                 }
         } else {
             CatalogService.shared.postHandler(
@@ -147,9 +148,9 @@ class AppendToCatalogViewController: UIViewController {
                 description: description) {
                     self.customAlertShow(
                         title: "Новый товар",
-                        message: "Добавить новый товар?") {
-                        self.dismiss(animated: true)
-                    }
+                        message: "Добавить новый товар?",
+                        target: self
+                    )
                 }
         }
         
@@ -159,24 +160,13 @@ class AppendToCatalogViewController: UIViewController {
         CatalogService.shared.deleteHandler(id: cellData.id) {
             self.customAlertShow(
                 title: "Выбранный товар",
-                message: "Удалить выбранный товар?") {
-                self.dismiss(animated: true)
-            }
+                message: "Удалить выбранный товар?",
+                target: self
+            )
         }
         
     }
-    func customAlertShow(title: String, message: String, cancelAction: Bool = true, action: (() -> ())? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let alertActionOk = UIAlertAction(title: "OK", style: .default) { _ in
-            action?()
-        }
-        let alertActionCancel = UIAlertAction(title: "Отмена", style: .cancel)
-        if cancelAction {
-            alert.addAction(alertActionCancel)
-        }
-        alert.addAction(alertActionOk)
-        self.present(alert, animated: true)
-    }
+    
 }
 
 extension AppendToCatalogViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -192,5 +182,20 @@ extension AppendToCatalogViewController: UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         imageView.image = UIImage(named: images[row])
         selectedImage = images[row]
+    }
+}
+
+extension UIViewController {
+    func customAlertShow(title: String, message: String, cancelAction: Bool = true, target: UIViewController? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertActionOk = UIAlertAction(title: "OK", style: .default) { _ in
+            target?.dismiss(animated: true)
+        }
+        if cancelAction {
+            let alertActionCancel = UIAlertAction(title: "Отмена", style: .cancel)
+            alert.addAction(alertActionCancel)
+        }
+        alert.addAction(alertActionOk)
+        self.present(alert, animated: true)
     }
 }

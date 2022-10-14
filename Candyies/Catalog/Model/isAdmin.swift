@@ -7,15 +7,6 @@
 
 import UIKit
 
-struct Address {
-    var city: String
-    var street: String
-    var house: String
-    var apartment: String
-    var floor: String
-}
-
-
 class isAdminViewModel {
     static let shared = isAdminViewModel()
     var admin = true

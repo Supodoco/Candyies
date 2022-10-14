@@ -173,8 +173,8 @@ extension Cart: UITableViewDelegate, UITableViewDataSource {
             cell.image.image = CatalogViewModel.shared.cart[indexPath.row].image
             cell.labelCost.text = String(CatalogViewModel.shared.cart[indexPath.row].price * CatalogViewModel.shared.cart[indexPath.row].amount) + " ₽"
             cell.labelName.text = CatalogViewModel.shared.cart[indexPath.row].title
-            cell.buttonsMinus = CatalogCustomCell().buttonConfigure(cell.buttonsMinus, setTitle: "-")
-            cell.buttonPlus = CatalogCustomCell().buttonConfigure(cell.buttonPlus, setTitle: "+")
+            cell.buttonsMinus.buttonConfigure(setTitle: "-")
+            cell.buttonPlus.buttonConfigure(setTitle: "+")
             cell.buttonCounter.setTitle("\(CatalogViewModel.shared.cart[indexPath.row].amount)", for: .normal)
             cell.buttonCounter.setTitleColor(UIColor.black, for: .normal)
             
